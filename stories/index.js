@@ -162,7 +162,7 @@ storiesOf("Appointment", module)
     <Error
       message="Could not delete appointment."
       onClose={action("onClose")}
-    />
+    /> 
   ))
   .add("Create", () => (
     <Form
