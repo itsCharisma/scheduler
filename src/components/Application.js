@@ -20,6 +20,22 @@ export default function Application(props) {
   const appointmentsList = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
     const interviewers = getInterviewersForDay(state, state.day);
+
+    function bookInterview(id, interview) {
+      console.log(id, interview);
+      const appointment = {
+        ...state.appointments[id],
+        interview: { ...interview }
+      };
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+      setState({ ...state, appointments });
+      console.log(id, interview);
+    }
+
+
     return (
       <Appointment
         key={appointment.id}
@@ -27,6 +43,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
       />)
   });
 
