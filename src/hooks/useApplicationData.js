@@ -14,18 +14,23 @@ function reducer(state, action) {
       return { ...state, days: action.days, interviewers: action.interviewers, appointments: action.appointments }
     case SET_INTERVIEW: {
       const newInterview = state["appointments"];
-      const updatedDays = state.days.map((item) => {
-        if (item.appointments.includes(action.id)) {
-          if (!action.interview && state.appointments[action.id].interview) {
-            item.spots++;
-          } else if (action.interview && !state.appointments[action.id].interview) {
-            item.spots--;
+      const daysArray = state.days.map((day) => {
+        for (let appointment of day.appointments) {
+          if (action.id === appointment) {
+            if (action.interview && !state.appointments[action.id].interview) {
+              return { ...day, spots: day.spots - 1 };
+            } else if (
+              !action.interview && 
+              state.appointments[action.id].interview)
+            {
+              return { ...day, spots: day.spots + 1};
+            }
           }
         }
-        return item
+        return day
       })
       newInterview[action.id]["interview"] = action.interview;
-      return { ...state, appointments: newInterview, days: updatedDays };
+      return { ...state, appointments: newInterview, days: daysArray };
     }
     default:
       throw new Error(
