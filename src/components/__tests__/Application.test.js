@@ -99,6 +99,7 @@ describe("Application", () => {
   });
 
   it("shows the save error when failing to save an appointment", async () => {
+    axios.put.mockRejectedValueOnce();
     const { container } = render(<Application />);
     await waitForElement(() => getByText(container, "Archie Cohen"));
     const appointments = getAllByTestId(container, "appointment");
@@ -115,19 +116,19 @@ describe("Application", () => {
 
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
     
-     axios.put.mockRejectedValueOnce();
-    await axios.put();
-    await waitForElement(() => queryByText(appointment, "Error"));
-    // expect.stringMatching(/Could not save appointment/);
     
-    // const day = getAllByTestId(container, "day").find(day =>
-    //   queryByText(day, "Monday")
-    // );
+    await waitForElement(() => queryByText(appointment, "Error"));
+    expect.stringMatching(/Could not save appointment/);
+    
+    const day = getAllByTestId(container, "day").find(day =>
+      queryByText(day, "Monday")
+    );
 
-    // expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+    expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   });
 
-  xit("shows the delete error when failing to delete an existing appointment", async () => {
+  it("shows the delete error when failing to delete an existing appointment", async () => {
+    axios.delete.mockRejectedValueOnce();
     const { container } = render(<Application />);
     await waitForElement(() => getByText(container, "Archie Cohen"));
     const appointment = getAllByTestId(container, "appointment").find(
@@ -144,7 +145,7 @@ describe("Application", () => {
 
     expect(getByText(appointment, "Deleting")).toBeInTheDocument();
     
-    axios.delete.mockRejectedValueOnce();
+    
 
     await waitForElement(() => queryByText(appointment, "Error"));
     expect.stringMatching(/Could not delete appointment/);
