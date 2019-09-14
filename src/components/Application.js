@@ -24,6 +24,7 @@ export default function Application(props) {
             interview={getInterview(state, appointment.interview)}
             interviewers={interviewers}
             bookInterview={bookInterview}
+            interviewer={interviewers[0].id}
             cancelInterview={cancelInterview}
           />
         );
