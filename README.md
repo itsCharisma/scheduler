@@ -4,9 +4,9 @@ A React application that allows users to book and cancel interviews. Data is per
 
 ## Screenshots
 
-!["Screenshot of Interview Scheduler"]()
-!["Screenshot of Interview Scheduler New Interview"]()
-!["Screenshot of Interview Scheduler Deleting Interview"]()
+!["Screenshot of Interview Scheduler"](https://github.com/itsCharisma/scheduler/blob/master/docs/001_Main.png)
+!["Screenshot of Interview Scheduler New Interview"](https://github.com/itsCharisma/scheduler/blob/master/docs/002_Saving.png)
+!["Screenshot of Interview Scheduler Deleting Interview"](https://github.com/itsCharisma/scheduler/blob/master/docs/003_Deleting.png)
 
 ## Dependencies
 - Axios
